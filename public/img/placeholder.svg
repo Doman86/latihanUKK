@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#e9ecef"/>
+  <g fill="#adb5bd" text-anchor="middle" font-family="sans-serif">
+    <path d="M400 170 L520 260 L400 350 L280 260 Z" fill="#ced4da"/>
+    <path d="M280 260 L400 350 L400 470 L280 380 Z" fill="#adb5bd"/>
+    <path d="M520 260 L400 350 L400 470 L520 380 Z" fill="#ced4da"/>
+    <text x="400" y="520" font-size="24" font-weight="bold" fill="#6c757d">Foto Produk</text>
+  </g>
+</svg>
