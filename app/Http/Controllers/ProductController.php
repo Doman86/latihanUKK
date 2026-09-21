@@ -3,33 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ProductController extends Controller
 {
-    public function index(Request $request): View
+    public function index(): View
     {
-        $search = trim((string) $request->query('search'));
+        $search = request()->query('search');
 
         $products = Product::query()
-            ->with('user')
-            ->when($search !== '', function ($query) use ($search) {
-                $query->where(function ($q) use ($search) {
-                    $q->where('name', 'like', "%{$search}%")
-                        ->orWhere('description', 'like', "%{$search}%");
-                });
+            ->withCount('comments')
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
             })
             ->latest()
-            ->paginate(9)
-            ->withQueryString();
+            ->paginate(9);
 
         return view('products.index', compact('products', 'search'));
     }
 
     public function show(Product $product): View
     {
-        $product->load(['user', 'comments.user']);
+        $product->load('comments.user');
 
         return view('products.show', compact('product'));
     }
